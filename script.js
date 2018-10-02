@@ -37,7 +37,7 @@ window.addEventListener("resize", _ => {
 // Utility Functions
 const randomIntFromRange = (min, max) =>
   Math.floor(Math.random() * (max - min + 1) + min);
-const randomColor = c => c[Math.round(Math.random() * c.length)];
+const randomColor = c => c[Math.floor(Math.random() * c.length)];
 
 // Code
 //--------------------------------------------------------------------------------
@@ -59,10 +59,13 @@ function Circle(x, y, dx, dy, radius, color) {
     c.closePath();
   };
   this.drawLine = (a, b) => {
+    var gradient = c.createLinearGradient(a["x"], a["y"], b["x"], b["y"]);
+    gradient.addColorStop("0", a["color"]);
+    gradient.addColorStop("1", (b !== mouse && b["color"]) || a["color"]);
     c.beginPath();
     c.lineTo(a["x"], a["y"]);
     c.lineTo(b["x"], b["y"]);
-    c.strokeStyle = color;
+    c.strokeStyle = gradient;
     c.stroke();
     c.closePath();
   };
