@@ -8,6 +8,10 @@ const mouse = {
   x: innerWidth / 2,
   y: innerHeight / 2
 };
+const click = {
+  cx: innerWidth / 2,
+  cy: innerHeight / 2
+};
 let maxRadius = 30;
 let minRadius = 5;
 let maxDist = 80;
@@ -19,7 +23,11 @@ const colors = ["#43676B", "#EE836F", "#00A3AF", "#DCD3B2", "#DCCB18"];
 window.addEventListener("mousemove", e => {
   mouse.x = e.x;
   mouse.y = e.y;
-  console.log(mouse);
+});
+window.addEventListener("click", e => {
+  click.cx = e.x;
+  click.cy = e.y;
+  clickEvent(click.cx, click.cy);
 });
 window.addEventListener("resize", _ => {
   canvas.width = window.innerWidth;
@@ -96,6 +104,16 @@ function Circle(x, y, dx, dy, radius, color) {
     this.draw();
   };
 }
+
+const clickEvent = (cx, cy) => {
+  let radius = Math.random() * 10 + 5;
+  let dx = Math.random() - 0.5;
+  let dy = Math.random() - 0.5;
+  // let dy = 0;
+  let x = cx;
+  let y = cy;
+  circleArray.push(new Circle(x, y, dx, dy, radius, randomColor(colors)));
+};
 
 let circleArray = [];
 const init = _ => {
