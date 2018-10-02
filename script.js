@@ -10,12 +10,7 @@ const mouse = {
 };
 let maxRadius = 30;
 let minRadius = 5;
-let maxDist = 150;
-if (innerWidth < 800) {
-  maxDist = 70;
-} else if (innerWidth < 1300) {
-  maxDist = 120;
-}
+let maxDist = 80;
 const gravity = 0.5;
 const damping = 0.8;
 const traction = 0.99;
@@ -111,7 +106,7 @@ const init = _ => {
     maxDist = 120;
   }
   circleArray = [];
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < innerWidth / 15 + 50; i++) {
     let radius = Math.random() * 10 + 5;
     let dx = Math.random() - 0.5;
     let dy = Math.random() - 0.5;
