@@ -124,7 +124,15 @@ const init = _ => {
     maxDist = 120;
   }
   circleArray = [];
-  for (let i = 0; i < innerWidth / 15 + 50; i++) {
+  let sizing;
+  if (innerHeight < innerWidth && innerWidth < 1000) {
+    sizing = (innerHeight / innerWidth) * (innerWidth * 0.001) * 100;
+  } else if (innerWidth >= 1000) {
+    sizing = (innerHeight / innerWidth) * (innerWidth * 0.001) * 100 + 20;
+  } else {
+    sizing = (innerWidth / innerHeight) * (innerHeight * 0.001) * 100;
+  }
+  for (let i = 0; i < sizing; i++) {
     let radius = Math.random() * 10 + 5;
     let dx = Math.random() - 0.5;
     let dy = Math.random() - 0.5;
@@ -144,8 +152,8 @@ const animate = _ => {
   for (i in circleArray) {
     circleArray[i].update();
   }
-  for (let j = 0; j < circleArray.length - 1; j++) {
-    for (let i = 0; i < circleArray.length - 1; i++) {
+  for (let j = 0; j < circleArray.length; j++) {
+    for (let i = 0; i < circleArray.length; i++) {
       if (
         circleArray[j]["x"] - circleArray[i]["x"] <= maxDist &&
         circleArray[j]["x"] - circleArray[i]["x"] >= -maxDist &&
